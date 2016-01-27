@@ -19,4 +19,9 @@ loggerA = getLogger("a")
 
 @debug loggerA "debug"
 @info loggerA "info"
+
+# Not trigger error().
+@debug loggerA "$(error())"
+# Trigger error().
+@info loggerA "$(error())"
 ```
