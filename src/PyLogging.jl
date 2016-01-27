@@ -3,7 +3,7 @@ module PyLogging
 using PyCall
 @pyimport logging
 export @critical, @error, @warning, @info, @debug
-export getLogger, basicConfig
+export getLogger
 
 # 50, 40, ..., 0
 const CRITICAL = logging.CRITICAL
@@ -31,7 +31,7 @@ function getLogger(name::AbstractString)
 end
 
 function basicConfig(;kwargs...)
-	logging.basicConfig(;kwargs)
+	logging.basicConfig(;kwargs...)
 end
 
 
