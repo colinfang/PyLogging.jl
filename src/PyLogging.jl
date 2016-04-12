@@ -23,7 +23,7 @@ immutable Logger
 	function Logger(logger::PyObject)
 		new(
 			logger,
-			logger[:isEnabledFor]
+			logger[:isEnabledFor],
 			logger[:_log]
 		)
 	end
