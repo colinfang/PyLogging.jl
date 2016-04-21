@@ -1,17 +1,19 @@
 module PyLogging
 
 using PyCall
-@pyimport logging
+
 export @critical, @error, @warning, @info, @debug
 export getLogger
 
+const logging = pyimport("logging")
+
 # 50, 40, ..., 0
-const CRITICAL = logging.CRITICAL
-const ERROR = logging.ERROR
-const WARNING = logging.WARNING
-const INFO = logging.INFO
-const DEBUG = logging.DEBUG
-const NOTSET = logging.NOTSET
+const CRITICAL = convert(Int, logging["CRITICAL"])
+const ERROR = convert(Int, logging["ERROR"])
+const WARNING = convert(Int, logging["WARNING"])
+const INFO = convert(Int, logging["INFO"])
+const DEBUG = convert(Int, logging["DEBUG"])
+const NOTSET = convert(Int, logging["NOTSET"])
 
 
 immutable Logger
@@ -19,7 +21,7 @@ immutable Logger
 	# The following are cache so that we don't have to create many pyobjects.
 	isEnabledFor::PyObject
 	_log::PyObject
-	
+
 	function Logger(logger::PyObject)
 		new(
 			logger,
@@ -32,18 +34,18 @@ end
 
 
 function getLogger()
-	logger = logging.getLogger()
+	logger = pycall(logging["getLogger"], PyObject)
 	Logger(logger)
 end
- 
- 
+
+
 function getLogger(name::AbstractString)
-	logger = logging.getLogger(name)
+	logger = pycall(logging["getLogger"], PyObject, name)
 	Logger(logger)
 end
 
 function basicConfig(;kwargs...)
-	logging.basicConfig(;kwargs...)
+	pycall(logging["basicConfig"], PyObject; kwargs...)
 end
 
 
