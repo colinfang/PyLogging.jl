@@ -18,7 +18,7 @@ const NOTSET = convert(Int, logging["NOTSET"])
 
 immutable Logger
 	logger::PyObject
-	# The following are cache so that we don't have to create many pyobjects.
+	# The followings are cached so that we don't have to create many pyobjects.
 	isEnabledFor::PyObject
 	_log::PyObject
 
