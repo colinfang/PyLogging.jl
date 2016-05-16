@@ -1,5 +1,7 @@
 # PyLogging.jl
 
+[![Build Status](https://travis-ci.org/colinfang/PyLogging.jl.svg?branch=master)](https://travis-ci.org/colinfang/PyLogging.jl)
+
 ## Overview
 
 This is a Julia wrapper for Python logging package.
