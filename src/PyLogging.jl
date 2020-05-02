@@ -16,7 +16,7 @@ const DEBUG = convert(Int, logging["DEBUG"])
 const NOTSET = convert(Int, logging["NOTSET"])
 
 
-immutable Logger
+struct Logger
     logger::PyObject
     # The followings are cached so that we don't have to create many pyobjects.
     isEnabledFor::PyObject
