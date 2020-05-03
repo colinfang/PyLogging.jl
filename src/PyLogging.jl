@@ -7,6 +7,10 @@ export getLogger
 
 const logging = pyimport("logging")
 
+function __init__()
+    copy!(logging, pyimport("logging"))
+end
+
 # 50, 40, ..., 0
 const CRITICAL = convert(Int, logging["CRITICAL"])
 const ERROR = convert(Int, logging["ERROR"])
