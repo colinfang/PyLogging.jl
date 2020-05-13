@@ -11,13 +11,13 @@ function __init__()
     copy!(logging, pyimport("logging"))
 end
 
+
 # 50, 40, ..., 0
-const CRITICAL = convert(Int, logging["CRITICAL"])
-const ERROR = convert(Int, logging["ERROR"])
-const WARNING = convert(Int, logging["WARNING"])
-const INFO = convert(Int, logging["INFO"])
-const DEBUG = convert(Int, logging["DEBUG"])
-const NOTSET = convert(Int, logging["NOTSET"])
+const CRITICAL = logging.CRITICAL
+const ERROR = logging.ERROR
+const WARNING = logging.WARNING
+const INFO = logging.INFO
+const DEBUG = logging.DEBUG
 
 
 struct Logger
@@ -29,8 +29,8 @@ struct Logger
     function Logger(logger::PyObject)
         new(
             logger,
-            logger["isEnabledFor"],
-            logger["_log"]
+            logger.isEnabledFor,
+            logger._log
         )
     end
 end
@@ -38,18 +38,18 @@ end
 
 
 function getLogger()
-    logger = pycall(logging["getLogger"], PyObject)
+    logger = logging.getLogger()
     Logger(logger)
 end
 
 
 function getLogger(name::AbstractString)
-    logger = pycall(logging["getLogger"], PyObject, name)
+    logger = logging.getLogger(name)
     Logger(logger)
 end
 
 function basicConfig(;kwargs...)
-    pycall(logging["basicConfig"], PyObject; kwargs...)
+    logging.basicConfig(;kwargs...)
 end
 
 

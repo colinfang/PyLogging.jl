@@ -1,5 +1,8 @@
 using PyLogging
-using Base.Test
+using PyLogging: @warning, @error, @info, @debug
+using Test
 
-# write your own tests here
-@test 1 == 1
+
+const LOGGER = getLogger(string(@__MODULE__))
+
+@warning LOGGER "Hello"
